@@ -8,9 +8,9 @@ Start with:
 
 Candidate table:
 
-| Ticker | Price | Research | Timing | Entry / Zone | Status |
-|---|---:|---|---|---|---|
-| GM | 76.44 | BUY 8/10 | ENTER_NOW | 78.80 / 76.20 | 已到位 |
+| Ticker | Price | Research | Timing | Entry / Zone | Status | 二次择时 |
+|---|---:|---|---|---|---|---|
+| GM | 76.44 | BUY 8/10 | ENTER_NOW | 78.80 / 76.20 | 已到位 | 仍可入场 |
 
 Sections:
 
@@ -18,6 +18,7 @@ Sections:
 - `接近但还需确认`
 - `原本有信号但已涨出买区`
 - `剔除/等待`
+- `二次择时后不值得入场`
 
 Close with:
 

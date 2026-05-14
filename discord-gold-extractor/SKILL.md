@@ -18,6 +18,7 @@ description: Extract gold daily and weekly reports from private Discord finance 
    - GPT often gives cleaner scenario probabilities and levels.
    - If they disagree, present both and state the common actionable overlap.
 5. Summarize gold as scenarios, not as a single stock-style buy zone.
+6. If current XAUUSD/GC1 price is at or near a report support, resistance, breakout, or breakdown level, run a second-pass timing re-analysis before calling it tradable.
 
 ## Required Summary Fields
 
@@ -50,9 +51,11 @@ Use a concise structure:
 3. `转多条件`: levels and required confirmation.
 4. `转空条件`: levels and required confirmation.
 5. `执行`: what to do near support/resistance, and when not to trade.
-6. `分歧`: Opus vs GPT if material.
+6. `当前是否值得入场`: if price is near a key level, classify as `可执行`, `轻仓`, `等确认`, or `不做`.
+7. `分歧`: Opus vs GPT if material.
 
 ## References
 
 - For the latest extracted gold summary pattern, read `references/gold-summary.md`.
+- For current-level re-analysis, read `references/reanalysis-checklist.md`.
 - For the detailed workflow and channel map, read `references/workflow.md`.

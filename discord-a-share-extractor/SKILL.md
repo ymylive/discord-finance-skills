@@ -14,6 +14,7 @@ description: Extract A-share research and timing updates from private Discord fi
 5. Download attached PDFs and convert with `pdftotext -layout`. Timing PDFs often contain stricter Entry 1 / Entry 2 than the embed summary.
 6. Pull current A-share quotes from Eastmoney. Use `secid=1.<code>` for Shanghai/STAR codes beginning with `6`, and `secid=0.<code>` for Shenzhen/ChiNext codes beginning with `0` or `3`.
 7. Classify only latest `research=BUY` names as buy candidates. Keep HOLD/SELL/NOT_YET in the full extraction table but do not promote them as buy points.
+8. Run a second-pass timing re-analysis for every `已到位`, `接近`, or `研究区间内` candidate. The final answer must say whether it is still worth entering now, not merely that price is near the old entry level.
 
 ## Candidate Rules
 
@@ -26,6 +27,16 @@ Promote candidates only when the price and report agree:
 - `排除`: latest research is HOLD/SELL or timing is NOT_YET.
 
 When in doubt, prefer the timing PDF over the research embed summary.
+
+## Second-Pass Timing Verdicts
+
+After the first screen, assign one of these conclusions:
+
+- `仍可入场`: price is in the timing entry zone, above invalidation, and reward/risk is still reasonable.
+- `轻仓试探`: setup is valid but only marginal; use reduced size due to incomplete confirmation or wide stop.
+- `等确认`: price reached the zone but there is no stabilization, volume contraction, or reversal signal yet.
+- `放弃`: price has broken the stop/invalidation, moved too close to TP1, or no longer offers acceptable reward/risk.
+- `追高不入`: price has rebounded above the entry window before execution.
 
 ## Eastmoney Quote Pattern
 
@@ -58,4 +69,5 @@ Produce:
 ## References
 
 - For detailed extraction steps, read `references/workflow.md`.
+- For second-pass timing checks, read `references/reanalysis-checklist.md`.
 - For a compact output template, read `references/output-template.md`.

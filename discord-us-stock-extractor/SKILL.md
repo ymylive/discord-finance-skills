@@ -19,6 +19,7 @@ description: Extract US stock research and timing updates from private Discord f
    - timing Entry 1 / Entry 2, stop loss, TP levels
    - latest price
 7. Classify tickers conservatively. A clean candidate usually needs `research=BUY` and current price inside or below the research/timing entry zone. Treat `WAIT_PULLBACK` as actionable only if the price has actually pulled back into the specified entry zone.
+8. Run a second-pass timing re-analysis for every `已到位` or `接近` ticker before presenting it as actionable. Do not stop at "price touched the entry zone"; decide whether the setup is still worth entering now.
 
 ## Source Priorities
 
@@ -52,9 +53,18 @@ Use these status labels:
 - `等突破`: timing report requires breakout/retest confirmation.
 - `剔除`: latest research is HOLD/PASS/SELL or timing is NOT_YET.
 
+For all `已到位` and `接近` rows, add a second-pass conclusion:
+
+- `仍可入场`: price is still in the valid entry window, invalidation has not triggered, and reward/risk remains acceptable.
+- `轻仓试探`: valid but marginal because price is near the top of the zone, volatility is high, or confirmation is incomplete.
+- `等确认`: price reached the zone but needs stabilization, breakout retest, volume contraction, or candle confirmation.
+- `放弃`: stop/invalidation has triggered, price has already reached TP1, or reward/risk has collapsed.
+- `追高不入`: price is above the intended entry window.
+
 Always include a brief financial-risk caveat.
 
 ## References
 
 - For implementation details and examples, read `references/workflow.md`.
+- For second-pass timing checks, read `references/reanalysis-checklist.md`.
 - For output wording and known field names, read `references/output-template.md`.

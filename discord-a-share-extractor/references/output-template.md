@@ -8,9 +8,9 @@ Start with:
 
 Candidate table:
 
-| 代码 | 名称 | 现价 | 研究 | 择时 | Entry / Zone | 判断 |
-|---|---|---:|---|---|---|---|
-| 300014 | 亿纬锂能 | 66.41 | BUY | WAIT_PULLBACK | Entry 67.5 / SL 62 | 已回踩到首档下方，需企稳 |
+| 代码 | 名称 | 现价 | 研究 | 择时 | Entry / Zone | 初筛 | 二次择时 |
+|---|---|---:|---|---|---|---|---|
+| 300014 | 亿纬锂能 | 66.41 | BUY | WAIT_PULLBACK | Entry 67.5 / SL 62 | 已到位 | 等确认 |
 
 Preferred labels:
 
@@ -20,6 +20,7 @@ Preferred labels:
 - `需企稳`
 - `等突破`
 - `排除`
+- `二次择时后不值得入场`
 
 If all rows are requested, write a Markdown file and include:
 
