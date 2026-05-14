@@ -1,6 +1,6 @@
 ---
 name: discord-a-share-extractor
-description: Extract A-share research and timing updates from private Discord finance channels, parse attached A股 report PDFs, compare report entry levels with Eastmoney quotes, and identify stocks currently at or near buy levels. Use when the user asks to analyze Discord A股日常更新, A股个股研报, A-share reports, timing reports, buy zones, or latest A股 status from Discord.
+description: Extract A-share research and timing updates from private Discord finance channels, parse attached A股 report PDFs, compare report entry levels with Eastmoney quotes, and identify stocks currently at or near buy levels. Use when the user asks to analyze Discord A股日常更新, A股个股研报, A-share reports, timing reports, buy zones, timing hardness, or latest A股 status from Discord.
 ---
 
 # Discord A-Share Extractor
@@ -38,6 +38,8 @@ After the first screen, assign one of these conclusions:
 - `放弃`: price has broken the stop/invalidation, moved too close to TP1, or no longer offers acceptable reward/risk.
 - `追高不入`: price has rebounded above the entry window before execution.
 
+When the user asks for timing hardness, grade the setup with `H0`-`H5` using `references/timing-hardness.md`.
+
 ## Eastmoney Quote Pattern
 
 Use this endpoint for batches:
@@ -70,4 +72,5 @@ Produce:
 
 - For detailed extraction steps, read `references/workflow.md`.
 - For second-pass timing checks, read `references/reanalysis-checklist.md`.
+- For A-share timing hardness grading, read `references/timing-hardness.md`.
 - For a compact output template, read `references/output-template.md`.

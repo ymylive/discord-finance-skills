@@ -20,6 +20,8 @@ Sections:
 - `剔除/等待`
 - `二次择时后不值得入场`
 
+If the user asks for hardness, add `Hardness` after `二次择时` and explain any downgrade in one short clause.
+
 Close with:
 
 ```text

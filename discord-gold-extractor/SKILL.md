@@ -1,6 +1,6 @@
 ---
 name: discord-gold-extractor
-description: Extract gold daily and weekly reports from private Discord finance channels, reconcile Opus and GPT model views, summarize XAUUSD/GC1 bias, key levels, scenarios, triggers, invalidation rules, and trade-plan constraints. Use when the user asks for Discord 黄金研报, gold reports, XAUUSD analysis, daily/weekly gold summaries, or gold trading levels from Discord.
+description: Extract gold daily and weekly reports from private Discord finance channels, reconcile Opus and GPT model views, summarize XAUUSD/GC1 bias, key levels, scenarios, triggers, invalidation rules, and trade-plan constraints. Use when the user asks for Discord 黄金研报, gold reports, XAUUSD analysis, daily/weekly gold summaries, gold timing hardness, or gold trading levels from Discord.
 ---
 
 # Discord Gold Extractor
@@ -54,8 +54,11 @@ Use a concise structure:
 6. `当前是否值得入场`: if price is near a key level, classify as `可执行`, `轻仓`, `等确认`, or `不做`.
 7. `分歧`: Opus vs GPT if material.
 
+When the user asks for timing hardness, grade the setup with `H0`-`H5` using `references/timing-hardness.md`.
+
 ## References
 
 - For the latest extracted gold summary pattern, read `references/gold-summary.md`.
 - For current-level re-analysis, read `references/reanalysis-checklist.md`.
+- For gold timing hardness grading, read `references/timing-hardness.md`.
 - For the detailed workflow and channel map, read `references/workflow.md`.

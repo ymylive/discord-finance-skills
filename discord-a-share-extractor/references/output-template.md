@@ -22,6 +22,8 @@ Preferred labels:
 - `排除`
 - `二次择时后不值得入场`
 
+If the user asks for hardness, add `Hardness` after `二次择时` and explain any downgrade in one short clause.
+
 If all rows are requested, write a Markdown file and include:
 
 - source channel

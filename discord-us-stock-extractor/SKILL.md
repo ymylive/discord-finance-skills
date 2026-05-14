@@ -1,6 +1,6 @@
 ---
 name: discord-us-stock-extractor
-description: Extract US stock research and timing updates from private Discord finance channels, parse attached report PDFs, compare report entry levels with current market prices, and identify tickers currently at or near buy levels. Use when the user asks to analyze Discord 美股日常更新, 美股个股研报, US stock reports, timing reports, buy zones, or latest stock status from Discord.
+description: Extract US stock research and timing updates from private Discord finance channels, parse attached report PDFs, compare report entry levels with current market prices, and identify tickers currently at or near buy levels. Use when the user asks to analyze Discord 美股日常更新, 美股个股研报, US stock reports, timing reports, buy zones, timing hardness, or latest stock status from Discord.
 ---
 
 # Discord US Stock Extractor
@@ -61,10 +61,13 @@ For all `已到位` and `接近` rows, add a second-pass conclusion:
 - `放弃`: stop/invalidation has triggered, price has already reached TP1, or reward/risk has collapsed.
 - `追高不入`: price is above the intended entry window.
 
+When the user asks for timing hardness, grade the setup with `H0`-`H5` using `references/timing-hardness.md`.
+
 Always include a brief financial-risk caveat.
 
 ## References
 
 - For implementation details and examples, read `references/workflow.md`.
 - For second-pass timing checks, read `references/reanalysis-checklist.md`.
+- For US stock timing hardness grading, read `references/timing-hardness.md`.
 - For output wording and known field names, read `references/output-template.md`.
