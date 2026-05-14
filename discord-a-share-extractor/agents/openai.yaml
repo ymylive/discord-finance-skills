@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discord A-Shares"
+  short_description: "Extract Discord A-share reports"
+  default_prompt: "Extract the latest Discord A-share research and timing reports, compare them with Eastmoney quotes, and show which stocks are at buy levels."

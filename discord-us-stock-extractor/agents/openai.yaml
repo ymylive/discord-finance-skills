@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discord US Stocks"
+  short_description: "Extract Discord US stock reports"
+  default_prompt: "Extract the latest Discord US stock research and timing reports, compare them with current prices, and show which tickers are at buy levels."

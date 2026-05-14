@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discord Gold Reports"
+  short_description: "Extract Discord gold reports"
+  default_prompt: "Extract the latest Discord gold daily and weekly reports, reconcile model views, and summarize bias, levels, triggers, and invalidation rules."
