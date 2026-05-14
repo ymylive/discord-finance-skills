@@ -36,7 +36,28 @@ Then dump the cache again.
 
 ## PDF Parsing
 
-Download attachments from the message `attachments[].url` and run:
+For broad scans, download and convert all latest report PDFs with the helper script:
+
+```bash
+python scripts/cache_dump.py --contains 美股 --out /tmp/us_cache.json
+python scripts/download_report_pdfs.py \
+  --cache-json /tmp/us_cache.json \
+  --out-dir /tmp/us_pdfs \
+  --manifest /tmp/us_pdf_manifest.json \
+  --buy-only
+```
+
+Behavior:
+
+- Finds report messages from `aio-report:v1:us:<TICKER>:<research|timing>:<DATE>` metadata, with a title/date fallback for older cached messages.
+- Selects the latest `research` and latest `timing` message per ticker by default.
+- `--buy-only` keeps only tickers whose latest research verdict is `BUY`.
+- Downloads PDF attachments using both `attachments[].url` and `attachments[].proxy_url`.
+- Converts each PDF with `pdftotext -layout` and writes a manifest with per-file status.
+
+Use `--all-versions` only when checking historical report changes. Use `--ticker TICKER` repeatedly for a targeted retry.
+
+Manual fallback for a single attachment:
 
 ```bash
 pdftotext -layout report.pdf report.txt
@@ -58,6 +79,8 @@ WAIT_PULLBACK
 ENTER_NOW
 WAIT_BREAKOUT
 ```
+
+If the downloader reports `404`, the Discord signed attachment URL has expired. Open the ticker thread in Discord, rerun `cache_dump.py`, and then rerun `download_report_pdfs.py`. Keep the manifest and mention unresolved PDF failures in the final answer.
 
 ## Decision Logic
 

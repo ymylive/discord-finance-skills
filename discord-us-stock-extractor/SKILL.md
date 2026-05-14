@@ -11,15 +11,21 @@ description: Extract US stock research and timing updates from private Discord f
 2. Use `#美股-日常更新` as the daily index and individual stock threads as the source of truth.
 3. Prefer local Discord cache extraction over manual clicking when possible. Run `scripts/cache_dump.py` to inspect cached API payloads, then open missing thread deep links in Discord to force the client to cache the newest messages.
 4. For each ticker, pair the latest `深度研究` report with the latest `择时分析` report from the same or newest available date.
-5. Download attached PDFs when available and convert them with `pdftotext -layout`. Use the embed summary only as a fallback.
-6. Compare:
+5. For broad scans, dump all relevant cached messages and batch-download report PDFs before judging entries:
+   ```bash
+   python scripts/cache_dump.py --contains 美股 --out /path/to/us_cache.json
+   python scripts/download_report_pdfs.py --cache-json /path/to/us_cache.json --out-dir /path/to/us_pdfs --manifest /path/to/us_pdf_manifest.json --buy-only
+   ```
+   The downloader keeps latest `research/timing` per ticker, filters to latest research `BUY` when `--buy-only` is used, saves PDFs, and converts them with `pdftotext -layout`.
+6. Use attached PDFs and converted `.txt` files as the source of truth. Use the embed summary only when the PDF is unavailable or the Discord attachment URL has expired.
+7. Compare:
    - research verdict: `BUY`, `HOLD`, `PASS`, `SELL`
    - timing verdict: `ENTER_NOW`, `WAIT_PULLBACK`, `WAIT_BREAKOUT`, `NOT_YET`
    - research entry zone
    - timing Entry 1 / Entry 2, stop loss, TP levels
    - latest price
-7. Classify tickers conservatively. A clean candidate usually needs `research=BUY` and current price inside or below the research/timing entry zone. Treat `WAIT_PULLBACK` as actionable only if the price has actually pulled back into the specified entry zone.
-8. Run a second-pass timing re-analysis for every `已到位` or `接近` ticker before presenting it as actionable. Do not stop at "price touched the entry zone"; decide whether the setup is still worth entering now.
+8. Classify tickers conservatively. A clean candidate usually needs `research=BUY` and current price inside or below the research/timing entry zone. Treat `WAIT_PULLBACK` as actionable only if the price has actually pulled back into the specified entry zone.
+9. Run a second-pass timing re-analysis for every `已到位` or `接近` ticker before presenting it as actionable. Do not stop at "price touched the entry zone"; decide whether the setup is still worth entering now.
 
 ## Source Priorities
 
@@ -31,6 +37,14 @@ Use the sources in this order:
 4. Current external quote source.
 
 Avoid `#美股状态看板` unless the user explicitly requests it; it can lag or use different assumptions.
+
+## Batch PDF Download Notes
+
+- Use `scripts/download_report_pdfs.py` for "all timing reports" requests instead of hand-written one-off download loops.
+- Default behavior selects the latest cached `research` and `timing` report per ticker. Add `--all-versions` only when the user explicitly wants historical report versions.
+- Use `--buy-only` when the user asks for candidates whose deep research direction is `BUY`.
+- If downloads fail with `404`, the Discord attachment URL is probably expired. Open the missing ticker threads in Discord to refresh cache URLs, rerun `cache_dump.py`, then rerun the downloader.
+- The manifest records every PDF path, text path, download status, conversion status, ticker, report kind, report date, and message id.
 
 ## Price Checks
 
